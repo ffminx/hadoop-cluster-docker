@@ -3,6 +3,26 @@
 # the default node number is 2
 N=${1:-2}
 
+# create hadoop network
+if ! docker network inspect hadoop > /dev/null ;
+then
+    echo "create hadoop network"
+    docker network create --driver bridge hadoop
+fi
+
+# start hadoop slave container
+i=1
+while [ $i -lt $N ]
+do
+	sudo docker rm -f hadoop-slave$i &> /dev/null
+	echo "start hadoop-slave$i container..."
+	sudo docker run -itd \
+                    --net hadoop \
+	                --name hadoop-slave$i \
+	                --hostname hadoop-slave$i \
+	                ffminx/hadoop:1.0 &> /dev/null
+	i=$(( $i + 1 ))
+done
 
 # start hadoop master container
 sudo docker rm -f hadoop-master &> /dev/null
@@ -19,21 +39,6 @@ sudo docker run -itd \
                 --hostname hadoop-master \
                 ffminx/hadoop:1.0 &> /dev/null
 
-
-# start hadoop slave container
-i=1
-while [ $i -lt $N ]
-do
-	sudo docker rm -f hadoop-slave$i &> /dev/null
-	echo "start hadoop-slave$i container..."
-	sudo docker run -itd \
-                    --net hadoop \
-	                --name hadoop-slave$i \
-	                --hostname hadoop-slave$i \
-	                ffminx/hadoop:1.0 &> /dev/null
-	i=$(( $i + 1 ))
-done 
-
 # get into hadoop master container
-sudo docker run -it hadoop-master:1.0 ./start-container.sh
-sudo docker exec -it hadoop-master /bin/bash
+ sudo docker exec -it hadoop-master /bin/bash
+

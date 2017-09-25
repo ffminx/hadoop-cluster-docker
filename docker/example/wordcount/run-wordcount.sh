@@ -10,7 +10,7 @@ hadoop fs -rm -r -f wordCountInput
 hadoop fs -mkdir -p wordCountInput
 
 # put input files to HDFS
-hdfs dfs -put ./input/* wordCountInput
+hdfs dfs -put ${basepath}/input/* wordCountInput
 
 hadoop fs -rm -r -f wordCountOutput
 
