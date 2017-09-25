@@ -13,7 +13,7 @@ hdfs dfs -put ./input/* singleTableJoinInput
 hadoop fs -rm -r -f singleTableJoinOutput
 
 # run single table join
-hadoop jar ./singleTableJoin.jar singleTableJoinInput singleTableJoinOutput
+hadoop jar ./singleTableJoin.jar zh.ffminx.hadoop.SingleTableJoin singleTableJoinInput singleTableJoinOutput
 
 # print the input files
 echo -e "\ninput:"
@@ -21,5 +21,5 @@ hdfs dfs -cat singleTableJoinInput/input.txt
 
 # print the output of single table output
 echo -e "\nsingleTableJoin output:"
-hdfs dfs -cat singleOutput/part-r-00000
+hdfs dfs -cat singleTableJoinOutput/part-r-00000
 

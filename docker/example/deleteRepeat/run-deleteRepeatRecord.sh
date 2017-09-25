@@ -13,7 +13,7 @@ hdfs dfs -put ./input/* deleteRepeatRecordInput
 hadoop fs -rm -r -f deleteRepeatRecordOutput
 
 # run delete repeat record
-hadoop jar ./deleteRepeatRecord.jar deleteRepeatRecordInput deleteRepeatRecordOutput
+hadoop jar ./deleteRepeatRecord.jar zh.ffminx.hadoop.DeleteRepeatRecord deleteRepeatRecordInput deleteRepeatRecordOutput
 
 # print the input files
 echo -e "\ninput file1.txt:"
