@@ -1,25 +1,28 @@
 #!/bin/bash
 
-# test the hadoop cluster by running wordcount
+# test the hadoop cluster by running delete repeat record
 
 # create input directory on HDFS
-hadoop fs -mkdir -p input2
+hadoop fs -rm -r -f deleteRepeatRecordInput
+hadoop fs -mkdir -p deleteRepeatRecordInput
 
 # put input files to HDFS
-hdfs dfs -put ./deleteRepeat/* input2
+hdfs dfs -put ./input/* deleteRepeatRecordInput
 
-hadoop fs -rm -r -f output2
-# run wordcount 
-hadoop jar ./deleteRepeat.jar input2 output2
+# clean output
+hadoop fs -rm -r -f deleteRepeatRecordOutput
+
+# run delete repeat record
+hadoop jar ./deleteRepeatRecord.jar deleteRepeatRecordInput deleteRepeatRecordOutput
 
 # print the input files
 echo -e "\ninput file1.txt:"
-hdfs dfs -cat input2/file1
+hdfs dfs -cat deleteRepeatRecordInput/file1.txt
 
 echo -e "\ninput file2.txt:"
-hdfs dfs -cat input2/file2
+hdfs dfs -cat deleteRepeatRecordInput/file2.txt
 
-# print the output of wordcount
-echo -e "\nwordcount output:"
-hdfs dfs -cat output2/part-r-00000
+# print the output of delete repeat record
+echo -e "\ndelete repeat record output:"
+hdfs dfs -cat deleteRepeatRecordOutput/part-r-00000
 

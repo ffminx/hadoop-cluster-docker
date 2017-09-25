@@ -22,7 +22,7 @@ public class SingleTableJoin {
 
     public static int time = 0;
 
-    public static class TokenizerMapper extends Mapper<Object, Text, Text, Text> {
+    public static class MyMapper extends Mapper<Object, Text, Text, Text> {
 
         public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
             // 左右表的标识
@@ -43,7 +43,7 @@ public class SingleTableJoin {
         }
     }
 
-    public static class IntSumReducer extends Reducer<Text, Text, Text, Text> {
+    public static class MyReducer extends Reducer<Text, Text, Text, Text> {
 
         public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
             int grandchildnum = 0;
@@ -89,13 +89,13 @@ public class SingleTableJoin {
         Configuration conf = new Configuration();
         String[] otherArgs = new GenericOptionsParser(conf, args).getRemainingArgs();
         if (otherArgs.length < 2) {
-            System.err.println("Usage: wordcount <in> [<in>...] <out>");
+            System.err.println("Usage: single table join <in> [<in>...] <out>");
             System.exit(2);
         }
-        Job job = Job.getInstance(conf, "word count");
+        Job job = Job.getInstance(conf, "single table join");
         job.setJarByClass(SingleTableJoin.class);
-        job.setMapperClass(TokenizerMapper.class);
-        job.setReducerClass(IntSumReducer.class);
+        job.setMapperClass(MyMapper.class);
+        job.setReducerClass(MyReducer.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
         for (int i = 0; i < otherArgs.length - 1; ++i) {

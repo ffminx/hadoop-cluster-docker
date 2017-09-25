@@ -16,7 +16,7 @@ import java.io.IOException;
  * @author fengmin.xu E-mail: fengmin.xu@56qq.com
  * @since 2017-09-18 15:47
  */
-public class DeleteRepeat {
+public class DeleteRepeatRecord {
 
     public static class MyMapper extends Mapper<Object, Text, Text, Text> {
 
@@ -37,11 +37,11 @@ public class DeleteRepeat {
         Configuration conf = new Configuration();
         String[] otherArgs = new GenericOptionsParser(conf, args).getRemainingArgs();
         if (otherArgs.length < 2) {
-            System.err.println("Usage: wordcount <in> [<in>...] <out>");
+            System.err.println("Usage: delete repeat record <in> [<in>...] <out>");
             System.exit(2);
         }
-        Job job = Job.getInstance(conf, "word count");
-        job.setJarByClass(DeleteRepeat.class);
+        Job job = Job.getInstance(conf, "delete repeat record");
+        job.setJarByClass(DeleteRepeatRecord.class);
         job.setMapperClass(MyMapper.class);
         job.setReducerClass(MyReduce.class);
         job.setOutputKeyClass(Text.class);

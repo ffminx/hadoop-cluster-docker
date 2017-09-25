@@ -3,13 +3,16 @@
 # test the hadoop cluster by running single table join
 
 # create input directory on HDFS
+hadoop fs -rm -r -f singleTableJoinInput
 hadoop fs -mkdir -p singleTableJoinInput
 
 # put input files to HDFS
 hdfs dfs -put ./input/* singleTableJoinInput
 
+# clean output
 hadoop fs -rm -r -f singleTableJoinOutput
-# run wordcount 
+
+# run single table join
 hadoop jar ./singleTableJoin.jar singleTableJoinInput singleTableJoinOutput
 
 # print the input files

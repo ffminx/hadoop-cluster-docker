@@ -8,7 +8,7 @@ WORKDIR /root
 RUN apt-get update && apt-get install -y openssh-server openjdk-7-jdk wget
 
 # install hadoop 2.7.2
-RUN wget https://archive.apache.org/dist/hadoop/common/hadoop-0.7.2.tar.gz && \ 
+RUN wget https://archive.apache.org/dist/hadoop/common/hadoop-2.7.2/hadoop-2.7.2.tar.gz && \
     tar -xzvf hadoop-2.7.2.tar.gz && \
     mv hadoop-2.7.2 /usr/local/hadoop && \
     rm hadoop-2.7.2.tar.gz
@@ -28,7 +28,7 @@ RUN mkdir -p ~/hdfs/namenode && \
 
 COPY config/* /tmp/
 
-ADD demo ~
+ADD example ~/example/ 
 
 RUN mv /tmp/ssh_config ~/.ssh/config && \
     mv /tmp/hadoop-env.sh /usr/local/hadoop/etc/hadoop/hadoop-env.sh && \
@@ -40,7 +40,6 @@ RUN mv /tmp/ssh_config ~/.ssh/config && \
     mv /tmp/start-hadoop.sh ~/start-hadoop.sh 
 
 RUN chmod +x ~/start-hadoop.sh && \
-    chmod +x ~/run-wordcount.sh && \
     chmod +x $HADOOP_HOME/sbin/start-dfs.sh && \
     chmod +x $HADOOP_HOME/sbin/start-yarn.sh 
 
@@ -48,4 +47,3 @@ RUN chmod +x ~/start-hadoop.sh && \
 RUN /usr/local/hadoop/bin/hdfs namenode -format
 
 CMD [ "sh", "-c", "service ssh start; bash"]
-
