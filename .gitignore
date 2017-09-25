@@ -7,3 +7,4 @@
 
 # JAVA
 target/
+*.jar
