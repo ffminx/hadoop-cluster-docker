@@ -1,19 +1,20 @@
 #!/bin/bash
 
 # test the hadoop cluster by running delete repeat record
+basepath=$(cd `dirname $0`; pwd)
 
 # create input directory on HDFS
 hadoop fs -rm -r -f deleteRepeatRecordInput
 hadoop fs -mkdir -p deleteRepeatRecordInput
 
 # put input files to HDFS
-hdfs dfs -put ./input/* deleteRepeatRecordInput
+hdfs dfs -put ${basepath}/input/* deleteRepeatRecordInput
 
 # clean output
 hadoop fs -rm -r -f deleteRepeatRecordOutput
 
 # run delete repeat record
-hadoop jar ./deleteRepeatRecord.jar zh.ffminx.hadoop.DeleteRepeatRecord deleteRepeatRecordInput deleteRepeatRecordOutput
+hadoop jar ${basepath}/deleteRepeatRecord.jar zh.ffminx.hadoop.DeleteRepeatRecord deleteRepeatRecordInput deleteRepeatRecordOutput
 
 # print the input files
 echo -e "\ninput file1.txt:"

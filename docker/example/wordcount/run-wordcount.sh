@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # test the hadoop cluster by running wordcount
+basepath=$(cd `dirname $0`; pwd)
 
 # create input files 
 
