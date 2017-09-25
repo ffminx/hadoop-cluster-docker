@@ -28,7 +28,7 @@ RUN mkdir -p ~/hdfs/namenode && \
 
 COPY config/* /tmp/
 
-ADD example ~/example/ 
+ADD example/ /root/example/ 
 
 RUN mv /tmp/ssh_config ~/.ssh/config && \
     mv /tmp/hadoop-env.sh /usr/local/hadoop/etc/hadoop/hadoop-env.sh && \

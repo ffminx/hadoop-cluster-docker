@@ -8,6 +8,7 @@ N=${1:-2}
 sudo docker rm -f hadoop-master &> /dev/null
 echo "start hadoop-master container..."
 sudo docker run -itd \
+                --net hadoop \
                 -p 50070:50070 \
                 -p 8088:8088 \
                 -p 9000:9000 \
@@ -26,6 +27,7 @@ do
 	sudo docker rm -f hadoop-slave$i &> /dev/null
 	echo "start hadoop-slave$i container..."
 	sudo docker run -itd \
+                    --net hadoop \
 	                --name hadoop-slave$i \
 	                --hostname hadoop-slave$i \
 	                kiwenlau/hadoop:1.0 &> /dev/null
