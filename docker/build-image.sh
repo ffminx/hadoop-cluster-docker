@@ -5,7 +5,7 @@ cd ../
 mvn package
 
 echo -e "\ncopy delete repeat record test jar"
-cp ./target/hadoop-cluster-docker-1.0-SNAPSHOT.jar ./docker/example/deleteRepeat/deleteRepeatRecord.jar
+cp ./target/hadoop-cluster-docker-1.0-SNAPSHOT.jar ./docker/example/deleteRepeatRecord/deleteRepeatRecord.jar
 
 echo -e "\ncopy single table join test jar"
 cp ./target/hadoop-cluster-docker-1.0-SNAPSHOT.jar ./docker/example/singleTableJoin/singleTableJoin.jar
